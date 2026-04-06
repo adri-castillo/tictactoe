@@ -16,7 +16,7 @@ Sigue estos pasos para configurar el proyecto en tu entorno local:
 ## Instalación y Configuración
 
 1. **Clonar el repositorio:**
-   `git clone <url-del-repo>`
+   `git clone https://github.com/adri-castillo/tictactoe.git`
 
 2. **Configurar el entorno virtual:**
    ```bash
