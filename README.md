@@ -55,4 +55,9 @@ Con el entorno activo, inicia una partida ejecutando el siguiente comando:
 - **Ctrl + C**: Forzar salida del proceso.
 
 
+## Tests Unitarios
+Para ejecutar los tests, utiliza el siguiente comando:
+```bash
+python manage.py test
+```
 

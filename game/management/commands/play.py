@@ -17,20 +17,16 @@ class Command(BaseCommand):
             while not game.is_finished:
                 self.graph_board(game.board)
 
-                # Input movimiento
                 move_input = input(f"\nTurno de {game.turn}, elige posición (0 - 8): ")
 
-                # Salir del juego
                 if move_input == "q":
                     self.stdout.write(self.style.WARNING("\nPartida cancelada"))
                     return
 
-                # Validar solo numeros
                 if not move_input.isdigit():
                     self.stdout.write(self.style.ERROR("\nIntroduce un número"))
                     continue
 
-                # Procesar movimiento
                 success, message = TicTacToeLogic.make_move(game, int(move_input))
 
                 if success:
@@ -38,7 +34,6 @@ class Command(BaseCommand):
                 else:
                     self.stdout.write(self.style.NOTICE(message))
 
-            # Fin del juego
             self.graph_board(game.board)
             self.result(game)
 

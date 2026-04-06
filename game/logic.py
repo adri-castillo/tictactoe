@@ -10,12 +10,11 @@ class TicTacToeLogic:
             (0, 4, 8),
             (2, 4, 6),
         ]
-        # Ganador
+
         for x, y, z in winning_combinations:
             if board[x] == board[y] == board[z] != " ":
                 return board[x]
             
-        # Empate
         if " " not in board:
             return "Draw"  
 
@@ -30,7 +29,6 @@ class TicTacToeLogic:
         board_list[position] = game.turn
         game.board = "".join(board_list)
 
-        # Verificar si existe ganador
         winner = TicTacToeLogic.check_winner(game.board)
 
         if winner:
