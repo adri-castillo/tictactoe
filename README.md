@@ -78,3 +78,41 @@ El sistema registra automáticamente cada partida en la base de datos, incluyend
 
 4. **Consultar logs:**
 En la sección "Games" podrás visualizar la lista de partidas, el ganador y la duración de cada una.
+
+## Interfaz API REST
+El juego soporta interacción vía API REST utilizando **Django REST Framework**. Lo que permite jugar desde la terminal con `curl` o cualquier cliente HTTP.
+
+### Endpoints Principales
+
+| Acción | Método | URL |
+| :--- | :--- | :--- |
+| Listar Partidas (Logs) | GET | `/api/games/` |
+| Crear Nueva Partida | POST | `/api/games/` |
+| Realizar Movimiento | POST | `/api/games/<id>/move/<pos>/` |
+| Cancelar Partida | POST | `/api/games/<id>/cancel/` |
+
+#### Ejemplo de uso
+- **Listar partidas:**
+```bash 
+   curl -X GET http://127.0.0.1:8000/api/games/
+```
+
+- **Crear nueva partida:**
+```bash 
+   curl -X POST http://127.0.0.1:8000/api/games/
+```
+Respuesta: Te dará un ID
+ *`{"id": 1}`*
+- **Hacer movimiento:**
+
+```bash 
+   curl -X POST http://127.0.0.1:8000/api/games/1/move/4/ 
+```
+Primer elemento es el ID de la partida creada, y el segundo elemento es la posición en el tablero.
+- **Cancelar partida:**
+```bash 
+   curl -X POST http://127.0.0.1:8000/api/games/1/cancel/
+```
+Finalizar una partida especificando su ID.
+
+

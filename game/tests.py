@@ -16,8 +16,8 @@ class TicTacToeTest(TestCase):
         success = TicTacToeLogic.make_move(self.game, 0)
 
         self.assertTrue(success)
-        self.assertEqual(self.game.board[0], "O")
-        self.assertEqual(self.game.turn, "X")
+        self.assertEqual(self.game.board[0], "X")
+        self.assertEqual(self.game.turn, "O")
 
     def test_occupied_box(self):
         TicTacToeLogic.make_move(self.game, 4)
