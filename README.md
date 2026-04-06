@@ -61,3 +61,20 @@ Para ejecutar los tests, utiliza el siguiente comando:
 python manage.py test
 ```
 
+## Control y Log de Partidas
+
+El sistema registra automáticamente cada partida en la base de datos, incluyendo fecha de creación y finalización. Para consultar el historial y las estadísticas:
+
+1. **Crear un superusuario:**
+   ```bash
+   python manage.py createsuperuser
+   ```
+2. **Levantar servidor:** 
+    ```bash 
+    python manage.py runserver
+    ```
+3. **Acceder al panel administrativo:**
+    `http://127.0.0.1:8000/admin`
+
+4. **Consultar logs:**
+En la sección "Games" podrás visualizar la lista de partidas, el ganador y la duración de cada una.

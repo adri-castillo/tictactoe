@@ -1,3 +1,5 @@
+from django.utils import timezone
+
 class TicTacToeLogic:
     def check_winner(board):
         winning_combinations = [
@@ -34,6 +36,8 @@ class TicTacToeLogic:
         if winner:
             game.winner = winner
             game.is_finished = True
+            
+            game.finished_at = timezone.now()
         else:
             game.turn = "O" if game.turn == "X" else "X"
 

@@ -1,13 +1,14 @@
 from django.core.management.base import BaseCommand
 from game.models import Game
 from game.logic import TicTacToeLogic
+from django.utils import timezone
 
 
 class Command(BaseCommand):
     help = "Tic-Tac-Toe"
 
     def handle(self, *args, **options):
-        game = Game.objects.create()
+        game = Game()
 
         self.stdout.write("\n·····························")
         self.stdout.write("\tTic-Tac-Toe\n")
@@ -20,7 +21,7 @@ class Command(BaseCommand):
                 move_input = input(f"\nTurno de {game.turn}, elige posición (0 - 8): ")
 
                 if move_input == "q":
-                    self.stdout.write(self.style.WARNING("\nPartida cancelada"))
+                    self.abort_game(game)
                     return
 
                 if not move_input.isdigit():
@@ -29,16 +30,14 @@ class Command(BaseCommand):
 
                 success, message = TicTacToeLogic.make_move(game, int(move_input))
 
-                if success:
-                    game.refresh_from_db()
-                else:
+                if not success:
                     self.stdout.write(self.style.NOTICE(message))
 
             self.graph_board(game.board)
             self.result(game)
 
         except KeyboardInterrupt:
-            self.stdout.write(self.style.WARNING("\nPartida cancelada"))
+            self.abort_game(game)
 
     def graph_board(self, b):
         self.stdout.write("\n")
@@ -56,3 +55,12 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING("Empate!"))
         else:
             self.stdout.write(self.style.SUCCESS(f"Gana {game.winner}!"))
+
+    def abort_game(self, game):
+        self.stdout.write(self.style.WARNING("\nPartida cancelada"))
+
+        if game.id:
+            game.winner = "Abandoned"
+            game.is_finished = True
+            game.finished_at = timezone.now()
+            game.save()
